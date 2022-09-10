@@ -1,4 +1,4 @@
-function Get-IP-Info {
+#function Get-IP-Info {
 
     Param(
     
@@ -18,14 +18,15 @@ function Get-IP-Info {
         [string]$IP,
         
         [Parameter()]
-        [switch]$j,
+        [switch]$j
 
-        [Parameter()]
-        [string]$Path
+       # [Parameter()]
+       # [string]$Path
     )
 
     Begin {
-        
+       
+        <#
         # Validate the $Path if set and $j is true. If not set, default $Path to User desktop if $j switch = true
         if ($j) {
             if ($Path) {
@@ -49,17 +50,53 @@ function Get-IP-Info {
         } else {
             $Path = [Environment]::GetFolderPath("Desktop")
         }
+        #>
 
         # Base url api for WHOIS through arin.net api
         $arin_api_url = 'http://whois.arin.net/rest'
 
-        # Header for JSON through Arin.net api
-        $arin_header = @{"Accept"="application/json"}
+        # Header for Arin.net api
+        $arin_header = @{"Accept"="application/xml"}
 
         # Base url for geolocation data through ip-api.com api
-        $ip_api_url = 'http://ip-api.com/json/'
+        $ip_api_url = 'http://ip-api.com/xml'
 
         # Base url for weather data through open-meteo.com api
         $open_meteo_api_url = "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto"
     }
-}
+
+    Process {
+        
+        # Get Whois Data
+        $whois_url = "$arin_api_url/ip/$IP"
+        $whois_inf = Invoke-Restmethod $whois_url -Headers $arin_header
+
+        # For Testing... Remove in final#
+        Write-Host ($whois_info.net | Out-String)
+        # For Testing... Remove in final#
+
+        #Get GeoLoc Data 
+        $geo_loc_url = "$ip_api_url/$IP"
+        $geo_loc_inf = Invoke-RestMethod $geo_loc_url 
+
+        # For Testing... Remove in final#
+        Write-Host ($geo_loc_inf.query | Out-String)
+        # For Testing... Remove in final#
+
+        # Read and set longitude and latitude
+        $latitude = ($geo_loc_inf.query.lat)
+        $longitude = ($geo_loc_inf.query.lon)
+
+        # Get Weather data
+        $weather_inf = Invoke-RestMethod $open_meteo_api_url
+
+        # For Testing... Remove in final#
+        Write-Host ($weather_inf.current_weather | Out-String)
+        # For Testing... Remove in final#
+
+
+
+
+
+    }
+#}
