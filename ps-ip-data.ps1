@@ -223,4 +223,3 @@ function Get-IP-Info {
 
 
     
-# ToDO Weather info switchs hops and latency 
