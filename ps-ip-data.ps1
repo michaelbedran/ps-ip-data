@@ -24,7 +24,7 @@ function Get-IP-Info {
 
     Begin {
 
-        Write-Host "Script is now running.."
+        Write-Host 'Script is now running..'
 
         # Base url api for WHOIS through arin.net api
         $arin_api_url = 'http://whois.arin.net/rest'
@@ -42,7 +42,7 @@ function Get-IP-Info {
         $open_meteo_api_url_3 = '&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto'
 
         # Base api for WorldTimeAPI
-        $world_time_api_url = "http://worldtimeapi.org/api/timezone/"
+        $world_time_api_url = 'http://worldtimeapi.org/api/timezone/'
     }
 
     Process {
@@ -88,20 +88,20 @@ function Get-IP-Info {
 
         # Set Weather condition 
         switch ($weather_inf.current_weather.weathercode) {
-            {0 -contains $_} { $weather = "Clear Sky"}
-            {1, 2, 3 -contains $_} { $weather = "Mainly clear, partly cloudy, and overcast"}
-            {45, 48 -contains $_} { $weather = "Fog and depositing rime fog"}
-            {51, 53, 55 -contains $_} { $weather = "Drizzle: Light, moderate, and dense intensity"}
-            {56, 57 -contains $_} { $weather = "Freezing Drizzle: Light and dense intensity"}
-            {61, 63, 65 -contains $_} { $weather = "Rain: Slight, moderate and heavy intensity"}
-            {66, 67 -contains $_} { $weather = "Freezing Rain: Light and heavy intensity"}
-            {71, 73, 75 -contains $_} { $weather = "Snow fall: Slight, moderate, and heavy intensity"}
-            {77 -contains $_} { $weather = "Snow grains"}
-            {80, 81, 82 -contains $_} { $weather = "Rain showers: Slight, moderate, and violent"}
-            {85, 86 -contains $_} { $weather = "Snow showers slight and heavy"}
-            {95 -contains $_} { $weather = "Thunderstorm: Slight or moderate"}
-            {96, 99 -contains $_} { $weather = "Thunderstorm with slight and heavy hail"}    
-            default {$weather = "No Weather Data Available"}
+            {0 -contains $_} { $weather = 'Clear Sky'}
+            {1, 2, 3 -contains $_} { $weather = 'Mainly clear, partly cloudy, and overcast'}
+            {45, 48 -contains $_} { $weather = 'Fog and depositing rime fog'}
+            {51, 53, 55 -contains $_} { $weather = 'Drizzle: Light, moderate, and dense intensity'}
+            {56, 57 -contains $_} { $weather = 'Freezing Drizzle: Light and dense intensity'}
+            {61, 63, 65 -contains $_} { $weather = 'Rain: Slight, moderate and heavy intensity'}
+            {66, 67 -contains $_} { $weather = 'Freezing Rain: Light and heavy intensity'}
+            {71, 73, 75 -contains $_} { $weather = 'Snow fall: Slight, moderate, and heavy intensity'}
+            {77 -contains $_} { $weather = 'Snow grains'}
+            {80, 81, 82 -contains $_} { $weather = 'Rain showers: Slight, moderate, and violent'}
+            {85, 86 -contains $_} { $weather = 'Snow showers slight and heavy'}
+            {95 -contains $_} { $weather = 'Thunderstorm: Slight or moderate'}
+            {96, 99 -contains $_} { $weather = 'Thunderstorm with slight and heavy hail'}    
+            default {$weather = 'No Weather Data Available'}
         }
         
         # Set Wind Direction
@@ -140,7 +140,7 @@ function Get-IP-Info {
             { ($_ -ge 337.5 ) -and ( $_ -lt 348.75)}  {$local_wind_direction = 'North-Northwest'}
             { ($_ -ge 348.75 ) -and ( $_ -le 360  )}  {$local_wind_direction = 'North by West'}            
             
-            Default {"No Wind Data Available"}
+            Default {'No Wind Data Available'}
         }
     }
 
@@ -159,10 +159,10 @@ function Get-IP-Info {
         $local_windspeed = "$local_windspeed mph"
 
         # If it only takes one hop, hops in output is chnaged to hop. 
-        $h = "hops"
+        $h = 'hops'
         if ($number_of_hops -eq 1)
         {
-            $h="hop"
+            $h='hop'
         }
 
         #output data as json object if flag marked, otherwise output in friendly manor. 
@@ -210,7 +210,7 @@ function Get-IP-Info {
            if ($weather_inf){
             Write-Host "The local weather shows as $weather, with a current windspeed of $local_windspeed. The winds are blowing due $local_wind_direction."
             } else {
-            Write-Host "We were unable to retrieve the weather data. Please try again later."
+            Write-Host 'We were unable to retrieve the weather data. Please try again later.'
            }
 
             Write-Host "The local timezone for $region_name is $timezone."
