@@ -29,7 +29,6 @@ function Get-IP-Info {
         # Base url api for WHOIS through arin.net api
         $arin_api_url = 'http://whois.arin.net/rest'
         
-
         # Header for Arin.net api
         $arin_header = @{"Accept"="application/xml"}
 
@@ -37,7 +36,7 @@ function Get-IP-Info {
         $ip_api_url = 'http://ip-api.com/xml'
         $ip_api_options = '?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,offset,isp,org,as,asname,query'
 
-        # Base url for weather data through open-meteo.com api
+        # Base url for weather data through open-meteo.com api 
         $open_meteo_api_url = 'https://api.open-meteo.com/v1/forecast?latitude='
         $open_meteo_api_url_2 = '&longitude='
         $open_meteo_api_url_3 = '&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto'
@@ -67,7 +66,6 @@ function Get-IP-Info {
         
         # Get Weather data
         $weather_inf = Invoke-RestMethod $open_meteo_api_url
-        
        
         # Set timezone
         $timezone = $geo_loc_inf.query.timezone
@@ -211,10 +209,12 @@ function Get-IP-Info {
 
            if ($weather_inf){
             Write-Host "The local weather shows as $weather, with a current windspeed of $local_windspeed. The winds are blowing due $local_wind_direction."
-            Write-Host "The current local date and time in the $timezone timezone is $local_time."
             } else {
             Write-Host "We were unable to retrieve the weather data. Please try again later."
            }
+
+            Write-Host "The local timezone for $region_name is $timezone."
+            Write-Host "The current local date and time in $region_name is $local_time."
         }
     }
 }
