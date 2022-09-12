@@ -5,6 +5,7 @@ Retreives data pertaining to an internaet routable IPv4 address.
 If an IP address does not match the schema for an internet routable address the script will throw an error informing the user. 
 .PARAMETER IP
 Mandatory perameter that can be supplied by commandline. Needs to be an internet routable IP address in order to pass validation.
+.PARAMETER j
 Switch that when triggered by commandline will print data in the form of a JSON object, rather than friendly words.
 .NOTES
 Requires Powershell Core or Powershell 7 +
