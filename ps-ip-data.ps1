@@ -1,8 +1,25 @@
+<#
+.SYNOPSIS
+Retreives data pertaining to an internaet routable IPv4 address.
+.DESCRIPTION
+If an IP address does not match the schema for an internet routable address the script will throw an error informing the user. 
+.PARAMETER IP
+Mandatory perameter that can be supplied by commandline. Needs to be an internet routable IP address in order to pass validation.
+Switch that when triggered by commandline will print data in the form of a JSON object, rather than friendly words.
+.NOTES
+Requires Powershell Core or Powershell 7 +
+.EXAMPLE
+Get-IP-Info 1.1.1.1
+Get-IP-Info -IP 1.1.1.1
+Get-IP-Info 1.1.1.1 -j
+Get-IP-Info -j
+#>
+
 function Get-IP-Info {
 
     Param(
     
-        [Parameter(Mandatory,ValueFromPipeline)]
+        [Parameter(Mandatory)]
         <#
         [ValidatePattern] bracketed Regular expression tests for valid internet routable ipv4 address. 
         Tests for valid ipv4 address and filters out: 
