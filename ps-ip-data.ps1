@@ -24,7 +24,10 @@ function Get-IP-Info {
 
     Begin {
 
+        Write-Host ''
+        Write-Host ''
         Write-Host 'Script is now running..'
+        Write-Host ''
 
         # Base url api for WHOIS through arin.net api
         $arin_api_url = 'http://whois.arin.net/rest'
@@ -197,24 +200,34 @@ function Get-IP-Info {
                 }
             
                 $json = $json_temp | ConvertTo-Json
+                Write-Host ''
+                Write-Host ''
                 Write-Host $json 
+                Write-Host ''
+                Write-Host ''
         }
         else {
-           Write-Host "It took $number_of_hops $h to get to this IP."
-           Write-Host "The average latency of 10 pings to the IP was $average_latency."
-           Write-Host "$owner_of_netblock owns the netblock."
-           Write-Host "$as_number_owner is the owner associated to the AS Number."
-           Write-Host "The ISP for this IP is $isp."
-           Write-Host "This IP is located in $country in the region of $region_name at the global coordinates of Latitude $latitude and Longitude $longitude."
+            Write-Host ''
+            Write-Host ''
+            Write-Host "It took $number_of_hops $h to get to this IP."
+            Write-Host "The average latency of 10 pings to the IP was $average_latency."
+            Write-Host "$owner_of_netblock owns the netblock."
+            Write-Host "$as_number_owner is the owner associated to the AS Number."
+            Write-Host "The ISP for this IP is $isp."
+            Write-Host ''
+            Write-Host "This IP is located in $country in the region of $region_name at the global coordinates of Latitude $latitude and Longitude $longitude."
+            Write-Host ''
 
            if ($weather_inf){
-            Write-Host "The local weather shows as $weather, with a current windspeed of $local_windspeed. The winds are blowing due $local_wind_direction."
+            Write-Host "The local weather for $region_name is $weather. The current windspeed is $local_windspeed, with winds blowing due $local_wind_direction."
             } else {
             Write-Host 'We were unable to retrieve the weather data. Please try again later.'
            }
-
+            Write-Host ''
             Write-Host "The local timezone for $region_name is $timezone."
             Write-Host "The current local date and time in $region_name is $local_time."
+            Write-Host ''
+            Write-Host ''
         }
     }
 }
